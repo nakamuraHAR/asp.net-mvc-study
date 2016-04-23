@@ -28,6 +28,8 @@ namespace PCInfoEditor.Models
     /// </summary>
     public class PCInfo
     {
+        public int ID { get; set; }
+
         /// <summary>
         /// PC管理番号
         /// </summary>
