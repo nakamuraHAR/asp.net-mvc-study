@@ -163,7 +163,7 @@ namespace PCInfoEditor.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "アカウントの確認", "このリンクをクリックすることによってアカウントを確認してください <a href=\"" + callbackUrl + "\">こちら</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "PCInfoes");
                 }
                 AddErrors(result);
             }
@@ -449,7 +449,7 @@ namespace PCInfoEditor.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "PCInfoes");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

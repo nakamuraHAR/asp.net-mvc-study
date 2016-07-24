@@ -1,0 +1,118 @@
+﻿@model IEnumerable<PCInfoEditor.Models.PCInfo>
+
+@{
+    ViewBag.Title = "PC情報";
+}
+
+<h2>PC情報</h2>
+
+<p>
+    @Html.ActionLink("新規登録", "Create")
+
+    @using (Html.BeginForm("Index", "PCInfoes", FormMethod.Get))
+    {
+        <table>
+            <tr>
+                <td>PC管理番号</td>
+                <td>@Html.TextBox("SerialNumber")</td>
+            <tr />
+            <tr>
+                <td>IPアドレス</td>
+                <td>@Html.TextBox("IPAddress")</td>
+            <tr />
+            <tr>
+                <td>使用区分</td>
+                <td>@Html.DropDownList("UseSegment", "All")</td>
+            <tr />
+            <tr>
+                <td>機種</td>
+                <td>@Html.TextBox("MachineType")</td>
+            <tr />
+            <tr>
+                <td>型番</td>
+                <td>@Html.TextBox("ModelNumber")</td>
+            <tr />
+            <tr>
+                <td>使用者名</td>
+                <td>@Html.TextBox("UserName")</td>
+            <tr />
+            <tr>
+                <td>PC名</td>
+                <td>@Html.TextBox("PCName")</td>
+            <tr />
+            <tr>
+                <td>備考</td>
+                <td>@Html.TextBox("Remark")</td>
+            <tr />
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="検索" />
+                </td>
+            <tr />
+</table>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IPAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UseSegment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MachineType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PCName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SerialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IPAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UseSegment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MachineType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PCName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+        <td>
+            @Html.ActionLink("編集", "Edit", new { id=item.ID }) |
+            <!--@Html.ActionLink("詳細", "Details", new { id=item.ID }) | -->
+            @Html.ActionLink("削除", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
