@@ -11,6 +11,7 @@
 
     @using (Html.BeginForm("Index", "PCInfoes", FormMethod.Get))
     {
+        <!-- 間隔を揃えるためテーブルで項目を作成 -->
         <table>
             <tr>
                 <td>PC管理番号</td>
@@ -109,7 +110,9 @@
         </td>
         <td>
             @Html.ActionLink("編集", "Edit", new { id=item.ID }) |
-            <!--@Html.ActionLink("詳細", "Details", new { id=item.ID }) | -->
+            <!--
+            @Html.ActionLink("詳細", "Details", new { id=item.ID }) |
+            -->
             @Html.ActionLink("削除", "Delete", new { id=item.ID })
         </td>
     </tr>

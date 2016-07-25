@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using PCInfoEditor.Models;
 
@@ -15,6 +13,8 @@ namespace PCInfoEditor.Controllers
         private PCInfoDBContext db = new PCInfoDBContext();
 
         // GET: PCInfoes
+        // [Authorize]属性をつけて、ログイン状態でないときに、PC管理画面に遷移しないように設定
+        [Authorize]
         public ActionResult Index(string serialNumber, string ipAddress, string useSegment, string machineType, string modelNumber, string userName, string pcName, string remark)
         {
             var useSegmentList = new List<UseSegment>();
@@ -23,38 +23,49 @@ namespace PCInfoEditor.Controllers
             ViewBag.useSegment = new SelectList(useSegmentList);
 
             var pcInfoes = from m in db.PCInfos select m;
+
+            // PC管理番号の条件で抽出
             if (!string.IsNullOrEmpty(serialNumber))
             {
                 pcInfoes = pcInfoes.Where(s => s.SerialNumber.Contains(serialNumber));
             }
+            // IPアドレスの条件で抽出
             if (!string.IsNullOrEmpty(ipAddress))
             {
                 pcInfoes = pcInfoes.Where(s => s.IPAddress.Contains(ipAddress));
             }
+            // 使用区分の条件で抽出
             if (!string.IsNullOrEmpty(useSegment))
             {
                 pcInfoes = pcInfoes.Where(s => s.UseSegment.ToString() == useSegment);
             }
+            // 機種の条件で抽出
             if (!string.IsNullOrEmpty(machineType))
             {
                 pcInfoes = pcInfoes.Where(s => s.MachineType.Contains(machineType));
             }
+            // 型番の条件で抽出
             if (!string.IsNullOrEmpty(modelNumber))
             {
                 pcInfoes = pcInfoes.Where(s => s.ModelNumber.Contains(modelNumber));
             }
+            // 使用者名の条件で抽出
             if (!string.IsNullOrEmpty(userName))
             {
                 pcInfoes = pcInfoes.Where(s => s.UserName.Contains(userName));
             }
+            // PC名の条件で抽出
             if (!string.IsNullOrEmpty(pcName))
             {
                 pcInfoes = pcInfoes.Where(s => s.PCName.Contains(pcName));
             }
+            // 備考の条件で抽出
             if (!string.IsNullOrEmpty(remark))
             {
                 pcInfoes = pcInfoes.Where(s => s.Remark.Contains(remark));
             }
+
+            // 結果表示
             return View(pcInfoes);
         }
 
