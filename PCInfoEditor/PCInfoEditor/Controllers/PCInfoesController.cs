@@ -8,13 +8,13 @@ using PCInfoEditor.Models;
 
 namespace PCInfoEditor.Controllers
 {
+    // [Authorize]属性をつけて、ログイン状態でないときに、PC管理画面に遷移しないように設定
+    [Authorize]
     public class PCInfoesController : Controller
     {
         private PCInfoDBContext db = new PCInfoDBContext();
 
         // GET: PCInfoes
-        // [Authorize]属性をつけて、ログイン状態でないときに、PC管理画面に遷移しないように設定
-        [Authorize]
         public ActionResult Index(string serialNumber, string ipAddress, string useSegment, string machineType, string modelNumber, string userName, string pcName, string remark)
         {
             var useSegmentList = new List<UseSegment>();
